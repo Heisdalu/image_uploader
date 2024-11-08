@@ -2,3 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+.custom-file-input {
+  color: transparent;
+  width: 100px;
+  position: relative;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: "browse files";
+  position: absolute;
+  top: 0;
+  color: #3662e3;
+  font-weight: 600;
+  display: inline-block;
+  outline: none;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+}
+
+.custom-file-input:hover .custom-file-input::before {
+  color: red;
+}
