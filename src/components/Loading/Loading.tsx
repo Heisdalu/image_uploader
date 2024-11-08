@@ -1,6 +1,27 @@
+import { motion } from "framer-motion";
+
 const Loading = () => {
   return (
-    <div>Loading</div>
-  )
-}
-export default Loading
+    <div className="flex justify-center items-center w-[100%] rounded-[10px] max-w-[400px] bg-[#fff] h-[100px] p-[0.5rem] shadow-[6px_17px_39px_-14px_#E5E7EB]">
+      <div className=" w-[100%] flex justify-center flex-col items-center space-y-[0.5rem]">
+        <h1 className="space-x-[5px]">
+          <span className="font-medium">Uploading,</span>
+          <span className="text-[#4D5562]">please wait...</span>
+        </h1>
+        <div className="overflow-hidden relative rounded-[10px] w-[70%] h-[7px] bg-[#E5E7EB]">
+          <motion.div
+            animate={{ left: "calc(100% - 30px)" }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              repeatType: "reverse",
+              type: "tween",
+            }}
+            className=" absolute top-0 left-[-40px] rounded-[10px] h-[100%] w-[50px] bg-[#3662E3]"
+          ></motion.div>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default Loading;
