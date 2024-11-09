@@ -31,7 +31,11 @@ const DragContainer = () => {
 
   return (
     <>
-      <div className="h-[calc(100%-75px)]  flex items-center justify-center px-[1rem] ">
+      <div
+        className={`h-[calc(100%-75px)] ${
+          viewState === "idle" ? "" : "flex items-center justify-center"
+        }  px-[1rem] `}
+      >
         <AnimatePresence mode="wait">
           {viewState === "idle" && (
             <Drag key={"drag"} formUpdate={formHandler} />

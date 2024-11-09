@@ -1,7 +1,7 @@
 import { Variants } from "framer-motion";
 
 export const exitAnimate: Variants = {
-  inital: {
+  initial: {
     opacity: 1,
   },
   animate: {
