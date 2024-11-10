@@ -6,6 +6,11 @@ body {
   user-select: none;
 }
 
+.dark .baller {
+  background-color: #212936 !important;
+  color: #fff !important;
+}
+
 .custom-file-input {
   color: transparent;
   width: 100px;

@@ -27,7 +27,7 @@ const DragContainer = () => {
     }, 5000);
   };
 
-  console.log(file);
+  // console.log(file);
 
   return (
     <>

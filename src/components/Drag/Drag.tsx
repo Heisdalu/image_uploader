@@ -2,36 +2,41 @@ import { exitAnimate } from "@/utils";
 import Image from "next/image";
 import { ChangeEvent, DragEvent, FC, useEffect } from "react";
 import { motion, useAnimate } from "framer-motion";
+import { toast } from "react-hot-toast";
 
 interface DragProps {
   formUpdate: ({ value, url }: { value: FormData; url: string }) => void;
 }
 
-const triggerForm = (file: File, func: DragProps["formUpdate"]) => {
-  const form = new FormData();
-  form.append("file", file);
-  func({
-    value: form,
-    url: URL.createObjectURL(file),
-  });
-};
-
 const Drag: FC<DragProps> = ({ formUpdate }) => {
   const [scope, animate] = useAnimate();
+
+  const triggerForm = (file: File, func: DragProps["formUpdate"]) => {
+    const form = new FormData();
+
+    if (!file.type.includes("image")) {
+      toast.error("Upload an image");
+      return;
+    }
+
+    form.append("file", file);
+    func({
+      value: form,
+      url: URL.createObjectURL(file),
+    });
+  };
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || !e.target.files[0]) return;
     const file = e.target.files[0];
-    console.log(file, "ll");
-
-    if (!file.type.includes("image")) return;
+    // console.log(file, "ll");
 
     triggerForm(file, formUpdate);
   };
 
   const drop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log(e.dataTransfer.files);
+    // console.log(e.dataTransfer.files);
     const file = e.dataTransfer.files;
 
     if (file[0]) {

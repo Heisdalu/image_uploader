@@ -1,8 +1,6 @@
 import Image from "next/image";
 
 const DisplayImage = ({ url }: { url: string }) => {
-  console.log(url);
-
   const download = () => {
     // Create a temporary link element
     const link = document.createElement("a");
@@ -27,12 +25,12 @@ const DisplayImage = ({ url }: { url: string }) => {
           />
         </div>
         <div className=" flex justify-center space-x-[1rem] text-white text-[0.8rem]">
-          <button className="bg-[#3662E3] flex items-center justify-center space-x-[0.5rem] py-[0.5rem] px-[1rem] rounded-[10px]">
+          {/* <button className="bg-[#3662E3] flex items-center justify-center space-x-[0.5rem] py-[0.5rem] px-[1rem] rounded-[10px]">
             <span>
               <Image height={15} width={15} src="Link.svg" alt="" />
             </span>
             <span>Share</span>
-          </button>
+          </button> */}
           <button
             onClick={download}
             className="bg-[#3662E3] flex justify-center items-center space-x-[0.5rem] py-[0.5rem] px-[1rem] rounded-[10px]"
