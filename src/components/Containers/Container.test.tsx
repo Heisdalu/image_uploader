@@ -1,13 +1,10 @@
-import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Container from "./Container";
 
 describe("Home", () => {
-  test("renders a heading", () => {
+  test("must accept a JSX child", () => {
     render(<Container children={<h1 className=""></h1>} />);
-
-    const heading = screen.getByRole("heading");
-
-    expect(heading).toBeInTheDocument();
+    const child = screen.getByRole("heading");
+    expect(child).toBeInTheDocument();
   });
 });

@@ -35,3 +35,8 @@ body {
 .custom-file-input:hover .custom-file-input::before {
   color: red;
 }
+
+.kik {
+  color: #c2daf9;
+  color: #ffffff;
+}

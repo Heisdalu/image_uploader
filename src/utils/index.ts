@@ -1,3 +1,5 @@
+import userEvent from "@testing-library/user-event";
+import { render } from "@testing-library/react";
 import { Variants } from "framer-motion";
 
 export const exitAnimate: Variants = {
@@ -14,3 +16,11 @@ export const exitAnimate: Variants = {
     },
   },
 };
+
+// setup function
+export function setup(jsx: JSX.Element) {
+  return {
+    user: userEvent.setup(),
+    ...render(jsx),
+  };
+}

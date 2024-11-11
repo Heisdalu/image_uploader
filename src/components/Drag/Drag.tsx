@@ -29,14 +29,12 @@ const Drag: FC<DragProps> = ({ formUpdate }) => {
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || !e.target.files[0]) return;
     const file = e.target.files[0];
-    // console.log(file, "ll");
 
     triggerForm(file, formUpdate);
   };
 
   const drop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    // console.log(e.dataTransfer.files);
     const file = e.dataTransfer.files;
 
     if (file[0]) {
@@ -54,6 +52,7 @@ const Drag: FC<DragProps> = ({ formUpdate }) => {
       e.preventDefault();
       e.stopPropagation();
     });
+
     window.addEventListener("dragenter", (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -66,6 +65,7 @@ const Drag: FC<DragProps> = ({ formUpdate }) => {
 
   return (
     <motion.div
+      data-testid="container"
       {...exitAnimate}
       onDragLeave={(e) => {
         e.preventDefault();
@@ -109,12 +109,12 @@ const Drag: FC<DragProps> = ({ formUpdate }) => {
             <div className="flex space-x-[6px]">
               <p className="font-medium">Drag & drop a file or </p>
               <input
-                accept="image"
+                data-testid="file_upload"
+                accept="image/*"
                 onChange={changeHandler}
                 type="file"
+                name="file upload"
                 className="custom-file-input"
-                name=""
-                id=""
               />
             </div>
             <p className="text-[#4D5562] dark:text-[#F9FAFBCC] text-[0.75rem]">
