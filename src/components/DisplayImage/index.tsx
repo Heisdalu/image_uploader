@@ -4,8 +4,6 @@ const DisplayImage = ({ url }: { url: string }) => {
   const download = () => {
     // Create a temporary link element
     const link = document.createElement("a");
-    console.log("okay");
-
     link.href = url;
     link.download = `${"image"}.jpg`;
     document.body.appendChild(link);

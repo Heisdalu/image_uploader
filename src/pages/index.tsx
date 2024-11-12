@@ -1,7 +1,6 @@
 import Container from "@/components/Containers/Container";
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import Drag from "@/components/Drag/Drag";
 import DragContainer from "@/components/Containers/Main";
 import { useState } from "react";
 import Link from "next/link";
