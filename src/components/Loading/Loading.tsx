@@ -14,7 +14,10 @@ const Loading = () => {
           </span>
           <span className="text-[#4D5562]">please wait...</span>
         </h1>
-        <div className="dark:bg-[#4D5562] overflow-hidden relative rounded-[10px] w-[70%] h-[7px] bg-[#E5E7EB]">
+        <div
+          data-testid="loading"
+          className="dark:bg-[#4D5562] overflow-hidden relative rounded-[10px] w-[70%] h-[7px] bg-[#E5E7EB]"
+        >
           <motion.div
             animate={{ left: "calc(100% - 30px)" }}
             transition={{
