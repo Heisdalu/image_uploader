@@ -4,8 +4,10 @@ const DisplayImage = ({ url }: { url: string }) => {
   const download = () => {
     // Create a temporary link element
     const link = document.createElement("a");
+    console.log("okay");
+
     link.href = url;
-    link.download = `${+new Date()}.jpg`;
+    link.download = `${"image"}.jpg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -20,7 +22,7 @@ const DisplayImage = ({ url }: { url: string }) => {
             height={250}
             width={300}
             src={url}
-            alt=""
+            alt="image"
             className="h-[100%] w-[100%]"
           />
         </div>
