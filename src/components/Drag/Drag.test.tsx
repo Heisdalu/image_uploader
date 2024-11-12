@@ -72,10 +72,10 @@ describe("Drag Component", () => {
     });
   });
 
-  test("should have a blue background when an image is dragged over", async () => {
+  test("should have a blue background when an image is dragged in drop box", async () => {
     render(<Drag formUpdate={jest.fn} />);
     const container = screen.getByTestId("container");
-    const outer = container.querySelector(".outer") as HTMLDivElement;
+    const outer = screen.getByTestId("outer") as HTMLDivElement;
     const inner = container.querySelector(".inner") as HTMLDivElement;
 
     expect(outer).toHaveClass("bg-[#fff]");
@@ -84,15 +84,37 @@ describe("Drag Component", () => {
     expect(outer).toHaveClass("outer");
     expect(inner).toHaveClass("inner");
 
-    await fireEvent.dragLeave(container, {
-      currentTarget: outer,
-      relatedTarget: inner,
+    //   jest.spyOn(container.addEventListener, '')
+    const event = new Event("dragleave", { bubbles: true });
+    Object.defineProperty(event, "relatedTarget", {
+      value: outer,
     });
+
+    await fireEvent(container, event);
 
     await waitFor(() => {
       //framer animation on the drop location
       expect(outer).toHaveStyle("background-color: #c2daf9");
       expect(inner).toHaveStyle("border-width: 0px");
+    });
+  });
+
+  test("should have a wh9te background when an image is away from drop box", async () => {
+    render(<Drag formUpdate={jest.fn} />);
+    const container = screen.getByTestId("container");
+    const outer = screen.getByTestId("outer");
+    const inner = container.querySelector(".inner");
+    const event = new Event("dragleave", { bubbles: true });
+    Object.defineProperty(event, "relatedTarget", {
+      value: container,
+    });
+
+    await fireEvent(container, event);
+
+    await waitFor(() => {
+      screen.debug(container);
+      expect(outer).toHaveStyle("background-color: #fff");
+      expect(inner).toHaveStyle("border-width: 2px");
     });
   });
 

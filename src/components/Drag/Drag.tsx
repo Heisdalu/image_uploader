@@ -70,6 +70,7 @@ const Drag: FC<DragProps> = ({ formUpdate }) => {
       onDragLeave={(e) => {
         e.preventDefault();
         e.stopPropagation();
+
         if (e.currentTarget !== e.relatedTarget) {
           animate([
             [
@@ -99,6 +100,7 @@ const Drag: FC<DragProps> = ({ formUpdate }) => {
       <div
         ref={scope}
         onDrop={drop}
+        data-testid="outer"
         className="outer w-[100%] rounded-[10px] max-w-[500px] bg-[#fff] h-[300px] p-[0.5rem] dark:bg-[#212936]"
       >
         <div className="inner h-[100%] border-[2px] border-dashed border-[#E5E7EB] dark:border-[#4D5562] rounded-[10px] p-[0.5rem] flex flex-col text-center justify-center items-center space-y-[1.25rem]">
