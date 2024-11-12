@@ -72,7 +72,7 @@ describe("Drag Component", () => {
     });
   });
 
-  test("should have a blue background when an image is dragged in drop box", async () => {
+  test("should have a blue background when an image is dragged in drop box and white when dragged away", async () => {
     render(<Drag formUpdate={jest.fn} />);
     const container = screen.getByTestId("container");
     const outer = screen.getByTestId("outer") as HTMLDivElement;
@@ -97,22 +97,16 @@ describe("Drag Component", () => {
       expect(outer).toHaveStyle("background-color: #c2daf9");
       expect(inner).toHaveStyle("border-width: 0px");
     });
-  });
 
-  test("should have a wh9te background when an image is away from drop box", async () => {
-    render(<Drag formUpdate={jest.fn} />);
-    const container = screen.getByTestId("container");
-    const outer = screen.getByTestId("outer");
-    const inner = container.querySelector(".inner");
-    const event = new Event("dragleave", { bubbles: true });
-    Object.defineProperty(event, "relatedTarget", {
+    // should show white background when image is dragged away from drop box
+    const event2 = new Event("dragleave", { bubbles: true });
+    Object.defineProperty(event2, "relatedTarget", {
       value: container,
     });
 
-    await fireEvent(container, event);
+    await fireEvent(container, event2);
 
     await waitFor(() => {
-      screen.debug(container);
       expect(outer).toHaveStyle("background-color: #fff");
       expect(inner).toHaveStyle("border-width: 2px");
     });
