@@ -17,6 +17,7 @@ const DragContainer = () => {
   );
 
   const formHandler = (data: { value: FormData; url: string }) => {
+
     setFile({
       form: data.value,
       url: data.url,
@@ -24,10 +25,8 @@ const DragContainer = () => {
     setViewState("loading");
     setTimeout(() => {
       setViewState("success");
-    }, 5000);
+    }, 3000);
   };
-
-  // console.log(file);
 
   return (
     <>

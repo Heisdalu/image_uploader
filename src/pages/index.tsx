@@ -15,7 +15,10 @@ const inter = Inter({
 export default function Home() {
   const [isDark, setIsDark] = useState(false);
   return (
-    <div className={`${inter.className} ${isDark ? "dark" : ""}`}>
+    <div
+      data-testid="main"
+      className={`${inter.className} ${isDark ? "dark" : ""}`}
+    >
       <Toaster
         toastOptions={{
           className: "baller",
