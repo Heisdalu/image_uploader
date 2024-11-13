@@ -3,6 +3,9 @@ import { setup } from "@/utils";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 beforeAll(() => {
   global.URL.createObjectURL = jest.fn(() => "http://mocked_file_url");
+  global.URL.revokeObjectURL = jest
+    .fn()
+    .mockImplementation(() => document.createDocumentFragment());
   Object.defineProperty(window, "matchMedia", {
     writable: true,
     value: () => ({
@@ -62,7 +65,6 @@ describe("Index page", () => {
   });
 
   test("should display loading spinner when image is dropped and after 5 secs, display image should be visible", async () => {
-    // video file not supported
     const mockFile = {
       0: new File(["image"], "example.jpg", {
         type: "image/jpeg",
@@ -93,13 +95,52 @@ describe("Index page", () => {
         //no loading state
         expect(screen.queryByTestId("loading")).toBeNull();
         expect(screen.getByText(/download/i)).toBeInTheDocument();
-        screen.debug();
       },
       {
         timeout: 4500,
         interval: 100,
       }
     );
+  });
+
+  test("should download when download button is clicked", async () => {
+    // document.body.removeChild = jest.fn();
+    const mockLink = jest.spyOn(document, "createElement");
+
+    const mockFile = {
+      0: new File(["image"], "example.jpg", {
+        type: "image/jpeg",
+      }),
+    };
+    render(<Index />);
+
+    const dropBox: HTMLDivElement = screen.getByTestId("outer");
+
+    await fireEvent.drop(dropBox, {
+      dataTransfer: {
+        files: mockFile,
+      },
+    });
+
+    await waitFor(
+      () => {
+        //no loading state
+        expect(screen.getByText(/download/i)).toBeInTheDocument();
+      },
+      {
+        timeout: 4500,
+        interval: 100,
+      }
+    );
+
+    expect(
+      screen.getByRole("button", {
+        name: /download/i,
+      })
+    ).toBeInTheDocument();
+    await fireEvent.click(screen.getByText(/download/i));
+    expect(mockLink).toHaveBeenCalledWith("a"); //anchor tag is present
+    expect(mockLink).toHaveBeenCalled();
   });
 });
 

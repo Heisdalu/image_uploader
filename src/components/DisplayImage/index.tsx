@@ -1,12 +1,16 @@
 import Image from "next/image";
 
 const DisplayImage = ({ url }: { url: string }) => {
-
   const download = () => {
     // Create a temporary link element
+    console.log("okay");
+
     const link = document.createElement("a");
     link.href = url;
     link.download = `${"image"}.jpg`;
+
+    console.log(link);
+
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
